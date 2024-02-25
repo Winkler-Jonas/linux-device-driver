@@ -2,3 +2,4 @@
 .idea
 /docs/build
 __pycache__/
+/docs/headings.txt

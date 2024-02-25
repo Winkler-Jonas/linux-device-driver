@@ -1,0 +1,149 @@
+/*
+ * Device Tree Overlay for Pimoroni's great Rainbow HAT
+ *
+ * This is one of my very first device tree overlays and it comes without any warranty.
+ *
+ * Claudia Meitinger, claudia.meitinger@tha.de
+ */
+
+/dts-v1/;
+/plugin/;
+/ {
+	compatible = "brcm,bcm2708";
+
+	/* identification */
+	part-number = "PIMORONI_RAINBOW-HAT";
+
+	fragment@0 {
+		target-path = "/";
+		__overlay__ {
+			led_button_device {
+				compatible = "tha,led-button";
+				status = "okay";
+				led-red-gpio = <&gpio 6 1>;
+				button-a-gpio = <&gpio 21 0>;
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <&gpio>;
+		__overlay__ {
+			pwm_pins: pwm_pins {
+				brcm,pins = <18 13>;
+				brcm,function = <2 4>;
+			};
+		};
+	};
+
+	fragment@2 {
+		target = <&pwm>;
+		__overlay__ {
+			pinctrl-names = "default";
+			pinctrl-0 = <&pwm_pins>;
+			assigned-clock-rates = <100000000>;
+			status = "okay";
+		};
+	};
+
+	fragment@3 {
+		target-path = "/";
+		__overlay__ {
+			rainbow_hat {
+				compatible = "tha,rainbow-hat";
+				status = "okay";
+
+				/* LEDs */
+				led-gpios = <&gpio  6 1>, /* red */
+					    <&gpio 19 1>, /* green */
+					    <&gpio 26 1>; /* blue */
+				/* Buttons */
+				button-gpios = <&gpio 21 0>, /* A */
+					       <&gpio 20 0>, /* B */
+					       <&gpio 16 0>; /* C */
+
+				pwms = <&pwm 1 100000000>;
+			};
+		};
+	};
+
+	fragment@4 {
+		target = <&spi0>;
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@5 {
+		target = <&spidev0>;
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@6 {
+		target = <&spi0>;
+		__overlay__ {
+			/* needed to avoid dtc warning */
+			#address-cells = <1>;
+			#size-cells = <0>;
+			spirainbow: spirainbow@0 {
+				compatible = "tha,rainbow-arc";
+				reg = <0>;	/* CE1 */
+				#address-cells = <0>;
+				#size-cells = <0>;
+				spi-max-frequency = <1000000>;
+				status = "okay";
+			};
+		};
+	};
+
+
+	fragment@7 {
+		target = <&i2c1>;
+		__overlay__ {
+			status = "okay";
+			pinctrl-names = "default";
+			pinctrl-0 = <&i2c1_pins>;
+		};
+	};
+
+	fragment@8 {
+		target = <&i2c1_pins>;
+		pins1: __overlay__ {
+			brcm,pins = <2 3>;
+			brcm,function = <4>; /* alt 0 */
+		};
+	};
+
+	fragment@9 {
+		target = <&i2c1_pins>;
+		pins2: __dormant__ {
+			brcm,pins = <44 45>;
+			brcm,function = <6>; /* alt 2 */
+		};
+	};
+
+	fragment@10 {
+		target = <&i2c1>;
+		__dormant__ {
+			compatible = "brcm,bcm2708-i2c";
+		};
+	};
+
+	fragment@11 {
+		target = <&i2c1>;
+
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			tha_bmp280: tha_bmp280@77 {
+				compatible = "tha,bmp280";
+				reg = <0x77>;
+				status = "okay";
+			};
+		};
+	};
+};
+

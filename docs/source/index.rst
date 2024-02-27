@@ -32,7 +32,7 @@ This work is licenced by `Creative-Commons-Licence`_.
 | `GitLab-Repo`_ (VPN-required 😑)
 
 .. _GitHub-Repo: https://github.com/Winkler-Jonas/linux-device-driver
-.. _GitLab-Repo: https://google.com
+.. _GitLab-Repo: https://gitlab.elektrotechnik.hs-augsburg.de/winjonas/linux-device-driver
 
 Last Change: |today|
 

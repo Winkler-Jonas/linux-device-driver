@@ -45,14 +45,14 @@ To access the drivers either clone the repository from `GitHub`_ or `Gitlab`_ (V
    git clone (repository_url)
 
 .. _GitHub: https://github.com/Winkler-Jonas/linux-device-driver
-.. _Gitlab:
+.. _Gitlab: https://gitlab.elektrotechnik.hs-augsburg.de/winjonas/linux-device-driver
 
 To compile and install all Drivers, the Device tree and the user-space application, execute the following command
 within the cloned repository folder.
 
 .. code-block:: bash
 
-   make full_install
+   sudo -E make full_install
 
 The device now must be restarted, because Raspberry does not allow to load device trees while running.
 Once restarted, reconnect using SSH and navigate to the repository.
@@ -61,4 +61,4 @@ The user-space application will be compiled and accessible from it's root direct
 
 .. code-block:: bash
 
-   ./user-space-app
+   ./app

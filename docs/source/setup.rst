@@ -35,6 +35,9 @@ The following lines need to be added to ``/boot/config.txt`` on the Raspberry.
 - ``dtparam=spi=on`` to enable device tree support for SPI-Drivers.
 - ``dtoverlay=rainbow-hat`` to boot the device with the overlay.
 
+The device now must be restarted, because Raspberry does not allow to load device trees while running.
+Once restarted, reconnect using SSH.
+
 Installation
 ************
 
@@ -54,11 +57,10 @@ within the cloned repository folder.
 
    sudo -E make full_install
 
-The device now must be restarted, because Raspberry does not allow to load device trees while running.
-Once restarted, reconnect using SSH and navigate to the repository.
-
 The user-space application will be compiled and accessible from it's root directory.
 
 .. code-block:: bash
 
    ./app
+
+To remove the driver, ``sudo rmmod rainbow_hat_driver`` must be executed.

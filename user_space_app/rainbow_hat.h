@@ -3,6 +3,7 @@
 #define LINUX_KERNEL_MODULE_WITH_CLION_IDE_SUPPORT_CMAKE_RAINBOW_HAT_H
 #include <unistd.h>
 #include <string.h>
+#include <stdio.h>
 
 // For debugging, set to 1 to enable debug prints
 #define DEBUG 0

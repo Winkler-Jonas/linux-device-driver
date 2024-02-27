@@ -31,4 +31,5 @@ install:
 
 # Compile and install everything
 full_install: all install
+	@echo "Successfully installed!"
 

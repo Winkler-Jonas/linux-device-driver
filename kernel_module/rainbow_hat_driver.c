@@ -88,10 +88,11 @@ static int hex_to_int(char c)
 // Function to parse a hex color string into an RGB structure
 static int parse_hex_color(const char *buf, unsigned int *color)
 {
+   int i;
 	int value;
 	*color = 0;
 
-	for (int i = 0; i < 6; i++) {
+	for (i = 0; i < 6; i++) {
 		value = hex_to_int(buf[i]);
 		if (value < 0)
 			return -EINVAL;

@@ -49,5 +49,5 @@ clean:
 
 install:
 	@echo "Installing the application to $(INSTALL_DIR)"
-	@cp -v $(TARGET) $(INSTALL_DIR)
+	@cp -v $(TARGET) $(INSTALL_DIR)/app
 

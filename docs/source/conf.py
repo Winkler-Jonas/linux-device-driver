@@ -28,6 +28,11 @@ html_theme = 'sphinx_rtd_theme'
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 html_static_path = ['_static']
 
+rst_epilog = """
+.. |break| raw:: html
+   
+   <br>
+"""
 
 def setup(app):
     app.add_css_file('/_static/css_override.css')
